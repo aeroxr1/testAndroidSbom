@@ -1,0 +1,135 @@
+initscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "org.cyclonedx:cyclonedx-gradle-plugin:1.10.0"
+  }
+}
+
+allprojects{
+  apply plugin:org.cyclonedx.gradle.CycloneDxPlugin
+  cyclonedxBom {
+    // includeConfigs is the list of configuration names to include when generating the BOM (leave empty to include every configuration), regex is supported
+    includeConfigs = ["runtimeClasspath"]
+    // skipConfigs is a list of configuration names to exclude when generating the BOM, regex is supported
+    skipConfigs = [
+            "debugCompileClasspath",
+            "debugAndroidTestCompileClasspath",
+            "debugUnitTestCompileClasspath",
+            "debugUnitTestRuntimeClasspath",
+            "debugApiElements",
+            "debugRuntimeElements",
+
+            "alphaReleaseApiElements",
+            "alphaReleaseAndroidTestCompileClasspath",
+            "alphaReleaseUnitTestCompileClasspath",
+            "alphaReleaseUnitTestRuntimeClasspath",
+            "alphaReleaseApiElements",
+            "alphaReleaseRuntimeElements",
+
+            "fdroidDebugApiElements",
+            "fdroidDebugAndroidTestCompileClasspath",
+            "fdroidDebugUnitTestCompileClasspath",
+            "fdroidDebugUnitTestRuntimeClasspath",
+            "fdroidDebugApiElements",
+            "fdroidDebugRuntimeElements",
+
+            "fdroidReleaseApiElements",
+            "fdroidReleaseAndroidTestCompileClasspath",
+            "fdroidReleaseUnitTestCompileClasspath",
+            "fdroidReleaseUnitTestRuntimeClasspath",
+            "fdroidReleaseApiElements",
+            "fdroidReleaseRuntimeElements",
+
+            "devDebugApiElements",
+            "devDebugAndroidTestCompileClasspath",
+            "devDebugUnitTestCompileClasspath",
+            "devDebugUnitTestRuntimeClasspath",
+            "devDebugApiElements",
+            "devDebugRuntimeElements",
+
+            "prodDebugApiElements",
+            "prodDebugAndroidTestCompileClasspath",
+            "prodDebugUnitTestCompileClasspath",
+            "prodDebugUnitTestRuntimeClasspath",
+            "prodDebugApiElements",
+            "prodDebugRuntimeElements",
+
+            "betaReleaseApiElements",
+            "betaReleaseAndroidTestCompileClasspath",
+            "betaReleaseUnitTestCompileClasspath",
+            "betaReleaseUnitTestRuntimeClasspath",
+            "betaReleaseApiElements",
+            "betaReleaseRuntimeElements",
+
+            "prodReleaseApiElements",
+            "prodReleaseAndroidTestCompileClasspath",
+            "prodReleaseUnitTestCompileClasspath",
+            "prodReleaseUnitTestRuntimeClasspath",
+            "prodReleaseApiElements",
+            "prodReleaseRuntimeElements",
+
+            "customReleaseApiElements",
+            "customReleaseAndroidTestCompileClasspath",
+            "customReleaseUnitTestCompileClasspath",
+            "customReleaseUnitTestRuntimeClasspath",
+            "customReleaseApiElements",
+            "customReleaseRuntimeElements",
+
+            "devReleaseApiElements",
+            "devReleaseAndroidTestCompileClasspath",
+            "devReleaseUnitTestCompileClasspath",
+            "devReleaseUnitTestRuntimeClasspath",
+            "devReleaseApiElements",
+            "devReleaseRuntimeElements",
+
+            "betaDebugApiElements",
+            "betaDebugAndroidTestCompileClasspath",
+            "betaDebugUnitTestCompileClasspath",
+            "betaDebugUnitTestRuntimeClasspath",
+            "betaDebugApiElements",
+            "betaDebugRuntimeElements",
+
+            "customDebugApiElements",
+            "customDebugAndroidTestCompileClasspath",
+            "customDebugUnitTestCompileClasspath",
+            "customDebugUnitTestRuntimeClasspath",
+            "customDebugApiElements",
+            "customDebugRuntimeElements",
+
+            "alphaDebugApiElements",
+            "alphaDebugAndroidTestCompileClasspath",
+            "alphaDebugUnitTestCompileClasspath",
+            "alphaDebugUnitTestRuntimeClasspath",
+            "alphaDebugApiElements",
+            "alphaDebugRuntimeElements",
+
+            "releaseUnitTestCompileClasspath",
+            "releaseUnitTestRuntimeClasspath",
+            "releaseApiElements",
+            "releaseRuntimeElements"
+    ]
+    // skipProjects is a list of project names to exclude when generating the BOM
+    //skipProjects = [rootProject.name, "yourTestSubProject"]
+    // Specified the type of project being built. Defaults to 'library'
+    projectType = "application"
+    // Specified the version of the CycloneDX specification to use. Defaults to '1.5'
+    schemaVersion = "1.6"
+    // Boms destination directory. Defaults to 'build/reports'
+    destination = file("build/reports")
+    // The file name for the generated BOMs (before the file format suffix). Defaults to 'bom'
+    outputName = "bom"
+    // The file format generated, can be xml, json or all for generating both. Defaults to 'all'
+    outputFormat = "json"
+    // Exclude BOM Serial Number. Defaults to 'true'
+    includeBomSerialNumber = false
+    // Exclude License Text. Defaults to 'true'
+    includeLicenseText = false
+    // Include resolution of full metadata for components including licenses. Defaults to 'true'
+    includeMetadataResolution = true
+  }
+}
+
